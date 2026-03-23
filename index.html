@@ -4,11 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>房間觀察分析 App</title>
+
   <meta name="theme-color" content="#0f172a" />
   <meta
     name="description"
-    content="房間觀察分析 App｜GitHub Pages 可部署版｜統計觀察、排序、追蹤、進出場紀錄"
+    content="房間觀察分析 App｜GitHub Pages PWA 版｜統計觀察、排序、追蹤、進出場紀錄"
   />
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -17,10 +21,10 @@
       <div class="card hero-main">
         <h1>房間觀察分析 App</h1>
         <p class="muted">
-          GitHub Pages 上線版。這是統計觀察工具，只提供參考排序與紀錄，不保證爆分或勝率。
+          GitHub Pages PWA 上線版。這是統計觀察工具，只提供參考排序與紀錄，不保證爆分或勝率。
         </p>
         <p class="footer-note">
-          可直接部署到 GitHub Pages，上線後手機與電腦都能開。
+          可直接部署到 GitHub Pages，上線後手機與電腦都能開，也可加入主畫面。
         </p>
       </div>
 
@@ -41,6 +45,19 @@
           <div class="muted">最高觀察分</div>
           <h2 id="bestScore">0</h2>
         </div>
+      </div>
+    </section>
+
+    <section class="card install-card">
+      <div class="section-title">
+        <h2>PWA 安裝</h2>
+        <span class="muted">可加入手機主畫面</span>
+      </div>
+      <div class="install-row">
+        <div class="install-text muted" id="installHint">
+          若裝置支援安裝，按下方按鈕即可加入主畫面。
+        </div>
+        <button id="installBtn" class="install-btn" disabled>安裝 App</button>
       </div>
     </section>
 
@@ -90,7 +107,7 @@
       <div class="card">
         <div class="muted">部署方式</div>
         <div class="info-text">
-          把這三個檔案上傳到 GitHub repository 根目錄，再開啟 GitHub Pages 即可。
+          把這些檔案上傳到 GitHub repository 根目錄，再開啟 GitHub Pages 即可。
         </div>
       </div>
     </section>
