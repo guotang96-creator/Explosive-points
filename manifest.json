@@ -1,0 +1,24 @@
+{
+  "name": "房間觀察分析 App",
+  "short_name": "房間分析",
+  "description": "房間觀察分析 App｜統計觀察、排序、追蹤、進出場紀錄",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait",
+  "lang": "zh-Hant",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
