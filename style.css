@@ -68,6 +68,29 @@ body {
   font-size: 30px;
 }
 
+.install-card {
+  margin-bottom: 18px;
+}
+
+.install-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.install-text {
+  flex: 1;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.install-btn {
+  width: auto;
+  min-width: 140px;
+}
+
 .muted {
   color: var(--muted);
 }
@@ -150,6 +173,12 @@ button {
 button:hover {
   opacity: 0.94;
   transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .secondary-btn {
@@ -279,8 +308,10 @@ th {
   .subgrid,
   .toolbar-room,
   .toolbar-weights,
-  .toolbar-log {
+  .toolbar-log,
+  .install-row {
     grid-template-columns: 1fr;
+    display: grid;
   }
 
   h1 {
@@ -294,6 +325,10 @@ th {
 
   .stats {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .install-btn {
+    width: 100%;
   }
 }
 
