@@ -13,6 +13,8 @@ const demoRooms = [
   { id: 1008, rate: 122.03, today: 64.5, last30: 108.1 }
 ];
 
+let deferredPrompt = null;
+
 function $(id) {
   return document.getElementById(id);
 }
@@ -296,6 +298,9 @@ function bindEvents() {
   $("weightRate").addEventListener("input", renderAll);
   $("weightToday").addEventListener("input", renderAll);
   $("weight30").addEventListener("input", renderAll);
+
+  const installBtn = $("installBtn");
+  installBtn.addEventListener("click", installPWA);
 }
 
 function renderAll() {
@@ -303,8 +308,65 @@ function renderAll() {
   renderLogs();
 }
 
+function setupPWAInstall() {
+  const installBtn = $("installBtn");
+  const installHint = $("installHint");
+
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    installBtn.disabled = false;
+    installHint.textContent = "你的裝置支援安裝，按下按鈕即可加入主畫面。";
+  });
+
+  window.addEventListener("appinstalled", () => {
+    deferredPrompt = null;
+    installBtn.disabled = true;
+    installHint.textContent = "App 已安裝完成，可從主畫面開啟。";
+  });
+
+  if (!("serviceWorker" in navigator)) {
+    installHint.textContent = "目前瀏覽器不支援 Service Worker，無法完整使用 PWA。";
+  }
+}
+
+async function installPWA() {
+  const installBtn = $("installBtn");
+  const installHint = $("installHint");
+
+  if (!deferredPrompt) {
+    installHint.textContent = "目前無法顯示安裝提示，請改用瀏覽器的「加入主畫面」。";
+    return;
+  }
+
+  deferredPrompt.prompt();
+  const choiceResult = await deferredPrompt.userChoice;
+
+  if (choiceResult.outcome === "accepted") {
+    installHint.textContent = "已送出安裝要求，請稍候。";
+  } else {
+    installHint.textContent = "你已取消安裝，可稍後再試。";
+  }
+
+  deferredPrompt = null;
+  installBtn.disabled = true;
+}
+
+async function registerServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
+
+  try {
+    await navigator.serviceWorker.register("./service-worker.js");
+    console.log("Service Worker 註冊成功");
+  } catch (error) {
+    console.error("Service Worker 註冊失敗:", error);
+  }
+}
+
 window.toggleTrack = toggleTrack;
 window.fillLogRoom = fillLogRoom;
 
 bindEvents();
 renderAll();
+setupPWAInstall();
+registerServiceWorker();
