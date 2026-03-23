@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>房間觀察分析 App</title>
+  <meta name="theme-color" content="#0f172a" />
+  <meta
+    name="description"
+    content="房間觀察分析 App｜GitHub Pages 可部署版｜統計觀察、排序、追蹤、進出場紀錄"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <div class="card hero-main">
+        <h1>房間觀察分析 App</h1>
+        <p class="muted">
+          GitHub Pages 上線版。這是統計觀察工具，只提供參考排序與紀錄，不保證爆分或勝率。
+        </p>
+        <p class="footer-note">
+          可直接部署到 GitHub Pages，上線後手機與電腦都能開。
+        </p>
+      </div>
+
+      <div class="stats">
+        <div class="card stat-box">
+          <div class="muted">追蹤房間</div>
+          <h2 id="trackedCount">0</h2>
+        </div>
+        <div class="card stat-box">
+          <div class="muted">已紀錄場次</div>
+          <h2 id="logCount">0</h2>
+        </div>
+        <div class="card stat-box">
+          <div class="muted">總盈虧</div>
+          <h2 id="totalProfit">0</h2>
+        </div>
+        <div class="card stat-box">
+          <div class="muted">最高觀察分</div>
+          <h2 id="bestScore">0</h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2>新增 / 編輯房間資料</h2>
+        <span class="muted">手動輸入數值後自動排序</span>
+      </div>
+
+      <div class="toolbar toolbar-room">
+        <input id="roomId" type="number" placeholder="房號，例如 1001" />
+        <input id="rate" type="number" step="0.01" placeholder="即時百分比" />
+        <input id="today" type="number" step="0.01" placeholder="今日得分率" />
+        <input id="last30" type="number" step="0.01" placeholder="近30天" />
+        <button id="roomSubmitBtn">新增 / 更新</button>
+      </div>
+
+      <div class="toolbar toolbar-weights">
+        <input id="weightRate" type="number" value="40" placeholder="即時權重" />
+        <input id="weightToday" type="number" value="30" placeholder="今日權重" />
+        <input id="weight30" type="number" value="30" placeholder="近30天權重" />
+        <select id="sortMode">
+          <option value="score">依觀察分數</option>
+          <option value="rate">依即時百分比</option>
+          <option value="today">依今日得分率</option>
+          <option value="last30">依近30天</option>
+        </select>
+        <button id="resetBtn" class="secondary-btn">重設示範資料</button>
+      </div>
+    </section>
+
+    <section class="subgrid">
+      <div class="card">
+        <div class="muted">評分說明</div>
+        <div class="info-text">
+          你可自訂三項權重，系統會算出每間房的觀察分數，僅供排序參考。
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="muted">提醒</div>
+        <div class="info-text danger">
+          高分不代表下一次一定表現較好，請務必自行控管風險與預算。
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="muted">部署方式</div>
+        <div class="info-text">
+          把這三個檔案上傳到 GitHub repository 根目錄，再開啟 GitHub Pages 即可。
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2>房間排行</h2>
+        <span class="muted">點擊可追蹤或記錄進場</span>
+      </div>
+      <div id="roomGrid" class="grid-rooms"></div>
+    </section>
+
+    <section class="card logs-card">
+      <div class="section-title">
+        <h2>進場 / 出場紀錄</h2>
+        <span class="muted">存在瀏覽器本機，不會上傳伺服器</span>
+      </div>
+
+      <div class="toolbar toolbar-log">
+        <input id="logRoomId" type="number" placeholder="房號" />
+        <input id="betAmount" type="number" placeholder="投入金額" />
+        <input id="returnAmount" type="number" placeholder="回收金額" />
+        <input id="note" type="text" placeholder="備註" />
+        <button id="logSubmitBtn">新增紀錄</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>時間</th>
+              <th>房號</th>
+              <th>投入</th>
+              <th>回收</th>
+              <th>盈虧</th>
+              <th>備註</th>
+            </tr>
+          </thead>
+          <tbody id="logTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
